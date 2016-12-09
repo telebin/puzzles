@@ -9,11 +9,7 @@ class TestFramework
     @test_cases.each do |c, r|
       puts "testing \"#{c}\":"
       act = logic c
-      if r == act
-        puts "#{act} ok"
-      else
-        puts "#{act} ain't #{r}"
-      end
+      puts r == act ? "#{act} ok" : "#{act} ain't #{r}"
     end
   end
 
