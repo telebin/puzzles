@@ -34,17 +34,15 @@ class Adv4_b < Adv4Base
     end
   end
 end
-# TODO 6 a lub b i 9 a/b!
+
 tests = Adv4_a.new({'aaaaa-bbb-z-y-x-123[abxyz]' => 123, 'a-b-c-d-e-f-g-h-987[abcde]' => 987,
                     'not-a-real-room-404[oarel]' => 404, 'totally-real-room-200[decoy]' => 0})
 # tests.test
 testsb = Adv4_b.new({'qzmt-zixmtkozy-ivhz-343[zimth]' => 'very encrypted name'})
 testsb.test
 
-sector_sum = 0
-File.open('AoC2016_inputs/day4.txt') { |f|
-  $lines = f.readlines
-}
+# sector_sum = 0
+File.open('AoC2016_inputs/day4.txt') { |f| $lines = f.readlines }
 # $lines.each { |l|
 #   sector_sum += tests.logic l
 # }

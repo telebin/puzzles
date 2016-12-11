@@ -1,6 +1,4 @@
 class TestFramework
-  @test_cases = {}
-
   def initialize test_cases
     @test_cases = test_cases
   end
