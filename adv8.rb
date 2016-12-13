@@ -1,6 +1,6 @@
 require './test_framework'
 
-class Adv8_a < TestFramework
+class Adv8 < TestFramework
   def logic(t)
     @display = Array.new(6) { Array.new(50) { 0 } }
     t.each do |step|
@@ -40,17 +40,8 @@ class Adv8_a < TestFramework
   end
 end
 
-class Adv8_b < TestFramework
-  def logic(t)
-
-  end
-end
-
-tests = Adv8_a.new({['rect 3x2','rotate column x=1 by 1','rotate row y=0 by 4','rotate column x=1 by 1'] => 6})
+tests = Adv8.new({['rect 3x2','rotate column x=1 by 1','rotate row y=0 by 4','rotate column x=1 by 1'] => 6})
 # tests.test
-testsb = Adv8_b.new({})
-# testsb.test
 
 File.open('AoC2016_inputs/day8.txt') { |f| $lines = f.readlines }
 puts tests.logic $lines
-# puts testsb.logic $lines.join("\n")
