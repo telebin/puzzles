@@ -48,6 +48,6 @@ File.open('AoC2016_inputs/day4.txt') { |f| $lines = f.readlines }
 # }
 # puts sector_sum
 $lines.each { |l|
-  a = testsb.logic l
+  a = testsb.run l
   puts a if a
 }

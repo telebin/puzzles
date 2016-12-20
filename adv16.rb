@@ -16,4 +16,4 @@ end
 
 testa = Adv16.new({'10000' => '01100'})
 # testa.test
-puts testa.logic '10111011111001111'
+puts testa.run '10111011111001111'

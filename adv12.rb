@@ -50,8 +50,6 @@ class Adv12 < TestFramework
   end
 end
 
-tests = Adv12.new({['cpy 41 a','inc a','inc a','dec a','jnz a 2','dec a'] => 42})
+tests = Adv12.new({['cpy 41 a','inc a','inc a','dec a','jnz a 2','dec a'] => 42}, 12)
 # tests.test
-
-File.open('AoC2016_inputs/day12.txt') { |f| $lines = f.readlines }
-puts tests.logic $lines
+puts tests.run

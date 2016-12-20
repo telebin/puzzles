@@ -81,7 +81,7 @@ end
 
 File.open('AoC2016_inputs/day15.txt') { |f| $lines = f.readlines }
 
-testa = Adv15_threaded.new({['Disc #1 has 5 positions; at time=0, it is at position 4.','Disc #2 has 2 positions; at time=0, it is at position 1.'] => 5})
+testa = Adv15_threaded.new({['Disc #1 has 5 positions; at time=0, it is at position 4.','Disc #2 has 2 positions; at time=0, it is at position 1.'] => 5}, 15)
 # testa.test
-# puts testa.logic $lines
-puts(testa.logic($lines << 'Disc #6 has 11 positions; at time=0, it is at position 0.'))
+# puts testa.run
+puts(testa.run($lines << 'Disc #6 has 11 positions; at time=0, it is at position 0.'))

@@ -38,4 +38,4 @@ File.open('AoC2016_inputs/day18.txt') { |f| $line = f.readline }
 
 testa = Adv18_a.new({'..^^.' => 9, '.^^.^.^^^^' => 38})
 # testa.test
-puts testa.logic $line
+puts testa.run $line

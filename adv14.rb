@@ -45,7 +45,7 @@ class Adv14_a < TestFramework
     sm = SumManager.new t
     puts 'Searching...'
     64.times do
-      while /(\w)\1{2}/ =~ sm.advance
+      until /(\w)\1{2}/ =~ sm.advance
       end
       c = $1
       redo if 1000.times do |i|
@@ -78,8 +78,8 @@ end
 
 testa = Adv14_a.new({'abc' => 22728})
 # testa.test
-# puts testa.logic 'jlmsuwbz'
+# puts testa.run 'jlmsuwbz'
 
 testb = Adv14_b.new({'abc' => 22551})
 # testb.test
-# puts testb.logic 'jlmsuwbz'
+puts testb.run 'jlmsuwbz'

@@ -42,11 +42,11 @@ end
 
 testa = Adv19_a.new({5 => 3})
 # testa.test
-# puts testa.logic 3017957
+# puts testa.run 3017957
 
 testb = Adv19_b.new({5 => 2, 6 => 3})
 # testb.test
-puts testb.logic 3017957
+puts testb.run 3017957
 
 #  6
 #     2
