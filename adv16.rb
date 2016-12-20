@@ -5,22 +5,12 @@ DISK_SIZE = 35651584
 class Adv16 < TestFramework
   def logic(t)
     input = t.clone
-    while input.size < DISK_SIZE
-      input += '0' + input.chars.reverse.map { |c| c == '0' ? '1' : '0' }.join
-    end
-    # puts "dragonized #{input} len #{input.size}"
-    input = input[0, DISK_SIZE]
-    # puts "cut #{input} len #{input.size} odd #{input.length.odd?}"
-    until input.length.odd?
-      chars = input.chars
-      input = ''
-      while chars.size >= 2
-        pair = chars.shift 2
-        input += pair[0] == pair[1] ? '1' : '0'
-      end
-      # puts "sum #{input}"
-    end
-    input
+    puts 'Filling disk...'
+    input += '0' + input.chars.reverse.map { |c| c == '0' ? '1' : '0' }.join while input.size < DISK_SIZE
+    input = input[0, DISK_SIZE].chars
+    puts 'Counting checksum...'
+    input = input.each_slice(2).map { |l,r| l == r ? '1' : '0' } until input.size.odd?
+    input.join
   end
 end
 
