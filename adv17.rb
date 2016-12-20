@@ -1,23 +1,17 @@
 require './test_framework'
-require './dijkstra'
 require 'digest'
 
 def md5f4(msg)
   Digest::MD5.hexdigest(msg)[0, 4].chars
 end
 
-class Adv17 < TestFramework
-  def logic(t)
-    @passcode = t.clone
-    @visited = []
-    path = ''
-    go(path, 0, 0)
-  end
-
+class Adv17Base < TestFramework
   def go(path, posx, posy)
-    return path if posx == 3 and posy == 3
-    return if @visited.include? path
-    @visited << path
+    if posx == 3 and posy == 3
+      @shortest = path if !@shortest or path.size < @shortest.size
+      @longest = path if !@longest or path.size > @longest.size
+      return
+    end
     u, d, l, r = md5f4(@passcode + path)
     go(path+'D', posx, posy + 1) if posy < 3 and open? d
     go(path+'R', posx + 1, posy) if posx < 3 and open? r
@@ -26,10 +20,34 @@ class Adv17 < TestFramework
   end
 
   def open?(v)
-    v.to_i(16) < 0xB
+    v.to_i(16) > 0xA
   end
 end
 
-testa = Adv17.new({'ihgpwlah' => 'DDRRRD', 'kglvqrro' => 'DDUDRLRRUDRD', 'ulqzkmiv' => 'DRURDRUDDLLDLUURRDULRLDUUDDDRR'})
+class Adv17_a < Adv17Base
+  def logic(t)
+    @passcode = t
+    @longest = nil
+    @shortest = nil
+    go('', 0, 0)
+    @shortest
+  end
+end
+
+class Adv17_b < Adv17Base
+  def logic(t)
+    @passcode = t
+    @longest = nil
+    @shortest = nil
+    go('', 0, 0)
+    @longest.length
+  end
+end
+
+testa = Adv17_a.new({'ihgpwlah' => 'DDRRRD', 'kglvqrro' => 'DDUDRLRRUDRD', 'ulqzkmiv' => 'DRURDRUDDLLDLUURRDULRLDUUDDDRR'})
 testa.test
-# puts testa.logic 'edjrjqaa'
+puts testa.run 'edjrjqaa'
+
+testb = Adv17_b.new({'ihgpwlah' => 370, 'kglvqrro' => 492, 'ulqzkmiv' => 830})
+testb.test
+puts testb.run 'edjrjqaa'
