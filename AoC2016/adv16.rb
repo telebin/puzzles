@@ -1,4 +1,4 @@
-require './test_framework'
+require '../test_framework'
 
 DISK_SIZE = 35651584
 

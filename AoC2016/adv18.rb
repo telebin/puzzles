@@ -1,4 +1,4 @@
-require './test_framework'
+require '../test_framework'
 
 class Adv18_a < TestFramework
   MAX_ROWS = 40
@@ -34,7 +34,7 @@ class Adv18_a < TestFramework
   end
 end
 
-File.open('AoC2016_inputs/day18.txt') { |f| $line = f.readline }
+File.open('inputs/day18.txt') { |f| $line = f.readline }
 
 testa = Adv18_a.new({'..^^.' => 9, '.^^.^.^^^^' => 38})
 # testa.test

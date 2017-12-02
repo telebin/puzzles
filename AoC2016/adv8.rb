@@ -1,4 +1,4 @@
-require './test_framework'
+require '../test_framework'
 
 class Adv8 < TestFramework
   def logic(t)
@@ -43,5 +43,5 @@ end
 tests = Adv8.new({['rect 3x2','rotate column x=1 by 1','rotate row y=0 by 4','rotate column x=1 by 1'] => 6})
 # tests.test
 
-File.open('AoC2016_inputs/day8.txt') { |f| $lines = f.readlines }
+File.open('inputs/day8.txt') { |f| $lines = f.readlines }
 puts tests.logic $lines

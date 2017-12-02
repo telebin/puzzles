@@ -1,4 +1,4 @@
-require './test_framework'
+require '../test_framework'
 require 'digest'
 require 'thread'
 STDOUT.sync = true

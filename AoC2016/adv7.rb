@@ -1,4 +1,4 @@
-require './test_framework'
+require '../test_framework'
 
 class Adv7Base < TestFramework
   def subify t
@@ -59,7 +59,7 @@ tests = Adv7_a.new({'abba[mnop]qrst' => true, 'abcd[bddb]xyyx' => false, 'aaaa[q
 testsb = Adv7_b.new({'aba[bab]xyz' => true, 'xyx[xyx]xyx' => false, 'aaa[kek]eke' => true, 'zazbz[bzb]cdb' => true})
 testsb.test
 
-File.open('AoC2016_inputs/day7.txt') { |f| 
+File.open('inputs/day7.txt') { |f|
   $lines = f.readlines
 }
 counter = 0

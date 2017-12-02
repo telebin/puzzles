@@ -1,4 +1,4 @@
-require './test_framework'
+require '../test_framework'
 require 'stringio'
 
 class Adv9Util
@@ -64,6 +64,6 @@ testsb = Adv9_b.new({'(3x3)XYZ' => 9, 'X(8x2)(3x3)ABCY' => 20, '(27x12)(20x12)(1
                      '(25x3)(3x3)ABC(2x3)XY(5x2)PQRSTX(18x9)(3x2)TWO(5x7)SEVEN' => 445})
 testsb.test
 
-File.open('AoC2016_inputs/day9.txt') { |f| $lines = f.readlines }
+File.open('inputs/day9.txt') { |f| $lines = f.readlines }
 # puts tests.logic $lines.join("\n").strip
 puts testsb.logic $lines.join("\n").strip
