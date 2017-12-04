@@ -1,5 +1,5 @@
 class TestFramework
-  def initialize test_cases, day_to_input = nil
+  def initialize(test_cases, day_to_input = nil)
     @test_cases = test_cases
     @day = day_to_input
   end
@@ -15,8 +15,9 @@ class TestFramework
   def logic(arg)
     raise 'Not implemented'
   end
+
   def run(arg = nil)
     raise 'Neither argument nor day to read' unless @day or arg
-    logic (arg or File.open("AoC2016_inputs/day#{@day}.txt") { |f| f.readlines })
+    logic (arg or File.open("inputs/day#{@day}.txt") {|f| f.readlines.chomp})
   end
 end

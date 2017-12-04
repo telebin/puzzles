@@ -1,4 +1,4 @@
-require './test_framework'
+require '../test_framework'
 
 class Adv21Base < TestFramework
   def scramble(t)

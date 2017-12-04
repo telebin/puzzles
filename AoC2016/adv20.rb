@@ -1,4 +1,4 @@
-require './test_framework'
+require '../test_framework'
 
 # returns:
 #  1 if other is HIGHER than self

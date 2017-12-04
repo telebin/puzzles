@@ -26,9 +26,9 @@ testa = Adv1_a.new({'1122' => 3,
                     '1111' => 4,
                     '1234' => 0,
                     '91212129' => 9
-                   })
+                   }, 3)
 # testa.test
-# puts testa.logic $line
+# puts testa.run
 
 testb = Adv1_b.new({
                        '1212' => 6,
@@ -36,6 +36,6 @@ testb = Adv1_b.new({
                        '123425' => 4,
                        '123123' => 12,
                        '12131415' => 4
-                   })
+                   }, 3)
 testb.test
-puts testb.logic $line
+puts testb.run
