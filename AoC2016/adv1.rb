@@ -1,4 +1,4 @@
-require './test_framework'
+require '../test_framework'
 
 class Adv1_a < TestFramework
   def logic(t)

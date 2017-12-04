@@ -1,4 +1,4 @@
-require './test_framework'
+require '../test_framework'
 
 class Adv2_a < TestFramework
   PINPAD = %w(123 456 789)

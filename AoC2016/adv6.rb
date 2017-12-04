@@ -1,4 +1,4 @@
-require './test_framework'
+require '../test_framework'
 
 class Adv6_a < TestFramework
   def logic t
@@ -16,5 +16,9 @@ tests = Adv6_a.new({"eedadn\ndrvtee\neandsr\nraavrd\natevrs\ntsrnev\nsdttsa\nras
 testsb = Adv6_b.new({"eedadn\ndrvtee\neandsr\nraavrd\natevrs\ntsrnev\nsdttsa\nrasrtv\nnssdts\nntnada\nsvetve\ntesnvt\nvntsnd\nvrdear\ndvrsen\nenarar".split => 'advent'}, 6)
 tests.test
 testsb.test
-puts tests.run
-puts testsb.run
+File.open('inputs/day6.txt') { |f|
+  puts tests.logic f.readlines.join "\n"
+}
+File.open('inputs/day6.txt') { |f|
+  puts testsb.logic f.readlines.join "\n"
+}

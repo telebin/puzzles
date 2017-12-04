@@ -1,4 +1,4 @@
-require './test_framework'
+require '../test_framework'
 
 class Adv4Base < TestFramework
   def get_name_and_sector(t)
@@ -42,7 +42,7 @@ testsb = Adv4_b.new({'qzmt-zixmtkozy-ivhz-343[zimth]' => 'very encrypted name'})
 testsb.test
 
 # sector_sum = 0
-File.open('AoC2016_inputs/day4.txt') { |f| $lines = f.readlines }
+File.open('inputs/day4.txt') { |f| $lines = f.readlines }
 # $lines.each { |l|
 #   sector_sum += tests.logic l
 # }

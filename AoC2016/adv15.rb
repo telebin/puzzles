@@ -1,4 +1,4 @@
-require './test_framework'
+require '../test_framework'
 require 'thread'
 
 class Adv15 < TestFramework
@@ -79,7 +79,7 @@ class Adv15_threaded < TestFramework
 
 end
 
-File.open('AoC2016_inputs/day15.txt') { |f| $lines = f.readlines }
+File.open('inputs/day15.txt') { |f| $lines = f.readlines }
 
 testa = Adv15_threaded.new({['Disc #1 has 5 positions; at time=0, it is at position 4.','Disc #2 has 2 positions; at time=0, it is at position 1.'] => 5}, 15)
 # testa.test

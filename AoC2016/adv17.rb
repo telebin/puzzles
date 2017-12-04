@@ -1,4 +1,5 @@
-require './test_framework'
+require '../test_framework'
+require '../dijkstra'
 require 'digest'
 
 def md5f4(msg)

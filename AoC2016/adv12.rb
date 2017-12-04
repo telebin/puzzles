@@ -1,4 +1,4 @@
-require './test_framework'
+require '../test_framework'
 
 class ComputR
   def initialize program
@@ -52,4 +52,6 @@ end
 
 tests = Adv12.new({['cpy 41 a','inc a','inc a','dec a','jnz a 2','dec a'] => 42}, 12)
 # tests.test
-puts tests.run
+
+File.open('inputs/day12.txt') { |f| $lines = f.readlines }
+puts tests.logic $lines
