@@ -54,9 +54,7 @@ class Grid
     up_to.times do |it|
       @mem[it] = @pos
       @map[@pos] = it
-      unless @map[@dir.next_dir.next_pos(@pos)]
-        @dir = @dir.next_dir
-      end
+      @dir = @dir.next_dir unless @map[@dir.next_dir.next_pos(@pos)]
       @pos = @dir.next_pos @pos
     end
     # puts "after all: mem #{@mem} map #{@map} pos #{@pos} dir #{@dir}"
@@ -64,6 +62,48 @@ class Grid
 
   def pos_of(loc)
     @mem[loc - 1]
+  end
+end
+
+class NeighbouringGrid
+  def initialize(up_to)
+    @pos = [0, 0]
+    @dir = Dir::DOWN
+    @map = {@pos => 1}
+    begin
+      @dir = @dir.next_dir unless @map[@dir.next_dir.next_pos(@pos)]
+      @pos = @dir.next_pos @pos
+      written = get_value_to_write
+      @map[@pos] = written
+      # puts "writing #{written} @ #{@pos}"
+      # puts "map now is #{@map}"
+    end while written <= up_to
+    # puts "after all: mem #{@mem} map #{@map} pos #{@pos} dir #{@dir}"
+  end
+
+  def get_value_to_write
+    next_l = @map[Dir::LEFT.next_pos(@pos)].to_i
+    next_r = @map[Dir::RIGHT.next_pos(@pos)].to_i
+    next_u = @map[Dir::UP.next_pos(@pos)].to_i
+    next_d = @map[Dir::DOWN.next_pos(@pos)].to_i
+    next_lu = @map[Dir::UP.next_pos(Dir::LEFT.next_pos(@pos))].to_i
+    next_ld = @map[Dir::DOWN.next_pos(Dir::LEFT.next_pos(@pos))].to_i
+    next_ru = @map[Dir::UP.next_pos(Dir::RIGHT.next_pos(@pos))].to_i
+    next_rd = @map[Dir::DOWN.next_pos(Dir::RIGHT.next_pos(@pos))].to_i
+
+    # puts "next_l pos #{Dir::LEFT.next_pos(@pos)} => #{next_l}"
+    # puts "next_r pos #{Dir::RIGHT.next_pos(@pos)} => #{next_r}"
+    # puts "next_u pos #{Dir::UP.next_pos(@pos)} => #{next_u}"
+    # puts "next_d pos #{Dir::DOWN.next_pos(@pos)} => #{next_d}"
+    # puts "next_lu pos #{Dir::UP.next_pos(Dir::LEFT.next_pos(@pos))} => #{next_lu}"
+    # puts "next_ld pos #{Dir::DOWN.next_pos(Dir::LEFT.next_pos(@pos))} => #{next_ld}"
+    # puts "next_ru pos #{Dir::UP.next_pos(Dir::RIGHT.next_pos(@pos))} => #{next_ru}"
+    # puts "next_rd pos #{Dir::DOWN.next_pos(Dir::RIGHT.next_pos(@pos))} => #{next_rd}"
+    next_l + next_r + next_u + next_d + next_lu + next_ld + next_ru + next_rd
+  end
+
+  def current_value
+    @map[@pos]
   end
 end
 
@@ -76,7 +116,8 @@ end
 
 class Adv3_b < TestFramework
   def logic(t)
-
+    grid = NeighbouringGrid.new t.to_i
+    grid.current_value
   end
 end
 
@@ -86,9 +127,14 @@ adva = Adv3_a.new({
                       '23' => 2,
                       '1024' => 31
                   }, 3)
-adva.test
-puts adva.run
+# adva.test
+# puts adva.run
 
-advb = Adv3_b.new({}, 3)
-# advb.test
-# puts advb.logic INPUT
+advb = Adv3_b.new({
+                      '5' => 10,
+                      '1' => 2,
+                      '54' => 57,
+                      '200' => 304
+                  }, 3)
+advb.test
+puts advb.run
