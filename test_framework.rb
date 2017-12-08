@@ -18,6 +18,6 @@ class TestFramework
 
   def run(arg = nil)
     raise 'Neither argument nor day to read' unless @day or arg
-    logic (arg or File.open("inputs/day#{@day}.txt") {|f| f.read.chomp})
+    logic (arg or File.open("inputs/day#{@day}.txt") { |f| f.read.chomp })
   end
 end
