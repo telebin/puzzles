@@ -53,16 +53,26 @@ end
 
 class Adv8_b < TestFramework
   def logic(t)
-
+    instructions = t.split("\n").map do |line|
+      /^(\w+) (inc|dec) (-?\d+) if (\w+) (<=?|>=?|!=|==) (-?\d+)$/ =~ line
+      Instruction.new $1, $2, $3, $4, $5, $6
+    end
+    registers = {}
+    instructions.reduce(-0xFFFF) do |acc, instr|
+      instr.modify registers
+      [acc, registers.values.max].max
+    end
   end
 end
 
 adva = Adv8_a.new({
                       "b inc 5 if a > 1\na inc 1 if b < 5\nc dec -10 if a >= 1\nc inc -20 if c == 10" => 1
                   }, 8)
-adva.test
-puts adva.run
+# adva.test
+# puts adva.run
 
-advb = Adv8_b.new({}, 8)
-# advb.test
-# puts advb.run
+advb = Adv8_b.new({
+                      "b inc 5 if a > 1\na inc 1 if b < 5\nc dec -10 if a >= 1\nc inc -20 if c == 10" => 10
+                  }, 8)
+advb.test
+puts advb.run
