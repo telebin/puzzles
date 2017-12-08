@@ -10,7 +10,7 @@ class Program
   end
 
   def total_weight
-    @total_weight ||= @weight + children.map {|c| c.total_weight}.sum
+    @total_weight ||= @weight + children.map { |c| c.total_weight }.sum
   end
 
   def inspect
@@ -28,8 +28,8 @@ class Adv7Base < TestFramework
       # puts "found parent named #{name} weight #{weight} and children #{children}"
       parent_prog = @programs[name.to_sym] ||= Program.new(name)
       parent_prog.weight = weight.to_i
-      parent_prog.children = children.map {|its_name| @programs[its_name.to_sym] ||= Program.new(its_name)}
-      parent_prog.children.each {|cp| cp.parent = parent_prog}
+      parent_prog.children = children.map { |its_name| @programs[its_name.to_sym] ||= Program.new(its_name) }
+      parent_prog.children.each { |cp| cp.parent = parent_prog }
     end
     @programs
   end
@@ -38,25 +38,25 @@ end
 
 class Adv7_a < Adv7Base
   def logic(t)
-    parse_programs(t).values.find {|prog| !prog.parent}.name
+    parse_programs(t).values.find { |prog| !prog.parent }.name
   end
 end
 
 class Adv7_b < Adv7Base
   def logic(t)
     parse_programs t
-    grand_parent = parse_programs(t).values.find {|prog| !prog.parent}
+    grand_parent = parse_programs(t).values.find { |prog| !prog.parent }
     grand_parent.total_weight
 
-    grouped_children = find_unbalanced(grand_parent).parent.children.group_by {|c| c.total_weight}.values
-    unbalanced = grouped_children.find {|c| c.size == 1}[0]
-    balanced_weight = grouped_children.find {|c| c.size != 1}[0].total_weight
+    grouped_children = find_unbalanced(grand_parent).parent.children.group_by { |c| c.total_weight }.values
+    unbalanced = grouped_children.find { |c| c.size == 1 }[0]
+    balanced_weight = grouped_children.find { |c| c.size != 1 }[0].total_weight
     unbalanced.weight - (unbalanced.total_weight - balanced_weight)
   end
 
   def find_unbalanced(parent)
-    children_weights = parent.children.group_by {|c| c.total_weight}.values
-    if (unbalanced = children_weights.find {|c_arr| c_arr.size == 1})
+    children_weights = parent.children.group_by { |c| c.total_weight }.values
+    if (unbalanced = children_weights.find { |c_arr| c_arr.size == 1 })
       find_unbalanced unbalanced[0]
     else
       parent
