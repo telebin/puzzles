@@ -41,7 +41,7 @@ class Adv10_b < TestFramework
       end
     end
     list.each_slice(16)
-        .reduce([]) { |a, slice| a << slice.reduce { |a, n| a ^ n } }
+        .reduce([]) { |arr, slice| arr << slice.reduce { |a, n| a ^ n } }
         .map { |num| ('0' + num.to_s(16))[-2, 2] }
         .join
   end
@@ -50,7 +50,7 @@ end
 adva = Adv10_a.new({
                        '3,4,1,5' => 12
                    }, 10)
-# $debug ? adva.test : puts(adva.run)
+$debug ? adva.test : puts(adva.run)
 
 advb = Adv10_b.new({
                        '' => 'a2582a3a0e66e6e86e3812dcb672a272',
