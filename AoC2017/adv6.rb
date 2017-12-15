@@ -38,8 +38,8 @@ end
 
 adva = Adv6_a.new({ "0\t2\t7\t0\n" => 5 }, 6)
 # adva.test
-# puts adva.run
+adva.run
 
 advb = Adv6_b.new({ "0\t2\t7\t0\n" => 4 }, 6)
-advb.test
-puts advb.run
+# advb.test
+# puts advb.run
