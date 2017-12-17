@@ -43,9 +43,7 @@ class Adv16_b < TestFramework
   def logic(t)
     instructions = t.split(',')
     dancers = ('a'..'p').to_a
-    results = []
-    counter = 0
-    1e3.to_i.times do
+    496.times do
       instructions.each do |instr|
         case instr[0]
           when 's'
@@ -60,9 +58,6 @@ class Adv16_b < TestFramework
           else
             raise 'invalid op'
         end
-        puts "Repeated #{dancers.join} on #{results.find_index dancers} index now #{counter} " if results.include? dancers
-        results << dancers.dup
-        counter += 1
       end
     end
     dancers.join
@@ -75,6 +70,4 @@ adva = Adv16_a.new({}, 16)
 
 advb = Adv16_b.new({}, 16)
 # advb.test
-start = Time.now
 puts advb.run
-puts "#{(Time.now - start)} s"
