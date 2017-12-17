@@ -22,10 +22,10 @@ end
 
 File.open('inputs/day1.txt') { |f| $line = f.readline.chomp }
 
-testa = Adv1_a.new({'1122' => 3,
-                    '1111' => 4,
-                    '1234' => 0,
-                    '91212129' => 9
+testa = Adv1_a.new({ '1122' => 3,
+                     '1111' => 4,
+                     '1234' => 0,
+                     '91212129' => 9
                    }, 3)
 # testa.test
 # puts testa.run

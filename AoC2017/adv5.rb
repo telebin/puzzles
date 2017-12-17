@@ -29,10 +29,10 @@ class Adv5_b < TestFramework
   end
 end
 
-adva = Adv5_a.new({"0\n3\n0\n1\n-3\n" => 5}, 5)
+adva = Adv5_a.new({ "0\n3\n0\n1\n-3\n" => 5 }, 5)
 # adva.test
 # puts adva.run
 
-advb = Adv5_b.new({"0\n3\n0\n1\n-3\n" => 10}, 5)
+advb = Adv5_b.new({ "0\n3\n0\n1\n-3\n" => 10 }, 5)
 advb.test
 puts advb.run

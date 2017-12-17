@@ -69,7 +69,7 @@ class NeighbouringGrid
   def initialize(up_to)
     @pos = [0, 0]
     @dir = Dir::DOWN
-    @map = {@pos => 1}
+    @map = { @pos => 1 }
     begin
       @dir = @dir.next_dir unless @map[@dir.next_dir.next_pos(@pos)]
       @pos = @dir.next_pos @pos

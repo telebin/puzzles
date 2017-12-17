@@ -18,14 +18,14 @@ class Adv13Base < TestFramework
     caught_on
   end
 
-    def move_sentinels(layers)
-      layers.each do |layer|
-        next unless layer
-        next_pos = layer[:pos] + layer[:dir]
-        layer[:dir] = -layer[:dir] if next_pos >= layer[:range] || next_pos < 0
-        layer[:pos] = layer[:pos] + layer[:dir]
-      end
+  def move_sentinels(layers)
+    layers.each do |layer|
+      next unless layer
+      next_pos = layer[:pos] + layer[:dir]
+      layer[:dir] = -layer[:dir] if next_pos >= layer[:range] || next_pos < 0
+      layer[:pos] = layer[:pos] + layer[:dir]
     end
+  end
 end
 
 class Adv13_a < Adv13Base
@@ -57,9 +57,9 @@ class Adv13_b < Adv13Base
   end
 
   private
-    def deep_copy(layers)
-      layers.reduce([]) { |a, h| a << h.clone; a }
-    end
+  def deep_copy(layers)
+    layers.reduce([]) { |a, h| a << h.clone; a }
+  end
 end
 
 adva = Adv13_a.new({ "0: 3\n1: 2\n4: 4\n6: 4\n" => 24 }, 13)
