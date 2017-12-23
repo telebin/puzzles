@@ -52,28 +52,33 @@ class Adv23_a < Adv23Base
   end
 end
 
-class Adv23_b < TestFramework
+class Adv23_b < Adv23Base
   def logic(t)
-    @regs = ('a'..'h').reduce({}) { |h, r| h.merge({ r => 0 }) }
-    @regs['a'] = 1
-    @ip = 0
-    @program = t.split("\n").map do |line|
-      /([^\s]+)\s([^\s]+)(?:\s([^\s]+))?$/ =~ line
-      { op: method($1.to_sym), op1: $2, op2: parse_operand($3) }
+    h = 0
+    b = 109300
+    c = b + 17000
+    while true
+      f = false
+      d = 2
+      begin
+        f = true if b % d == 0
+        d += 1
+      end until f || d - b == 0
+      h += 1 if f
+      if b - c == 0
+        puts h
+        exit
+      end
+      b += 17
     end
-    while @ip >= 0 && @ip < @program.length
-      log "program op = #{@program[@ip][:op]}, #{@program[@ip][:op1]}, #{@program[@ip][:op2]}"
-      @program[@ip][:op].call(@program[@ip][:op1], @program[@ip][:op2])
-      @ip += 1
-      log 'ip now: ' + @ip.to_s
-    end
+    h
   end
 end
 
 adva = Adv23_a.new({}, 23)
 # adva.test
-puts adva.run
+# puts adva.run
 
 advb = Adv23_b.new({}, 23)
 # advb.test
-# puts advb.run
+puts advb.run
