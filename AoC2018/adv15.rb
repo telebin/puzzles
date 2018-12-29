@@ -79,8 +79,12 @@ class Unit
     @hp
   end
 
-  def hit
-    @hp -= 3
+  def hit(force = 3)
+    @hp -= force
+  end
+
+  def power
+    @power
   end
 
   def dead?
@@ -98,9 +102,23 @@ class Goblin < Unit
   end
 end
 
+class ElfDeadError < StandardError
+
+end
+
+$power = 3
 class Elf < Unit
   def enemy_type
     Goblin
+  end
+
+  def hit(force = 3)
+    @hp -= force
+    raise ElfDeadError if @hp <= 0
+  end
+
+  def power
+    $power
   end
 
   def to_s
@@ -203,7 +221,7 @@ class GameMap
         changed = true
         enemy = @map[range.y][range.x].content
         log "enemy #{enemy.inspect}"
-        enemy.hit
+        enemy.hit @map[unit.y][unit.x].content.power
         log "enemy after hit #{enemy.inspect}"
         @map[range.y][range.x].content = nil if enemy.dead?
         log "niled dead enemy @ #{range}" if enemy.dead?
@@ -224,7 +242,7 @@ class GameMap
         if range
           enemy = @map[range.y][range.x].content
           log "enemy #{enemy.inspect}"
-          enemy.hit
+          enemy.hit @map[next_step.y][next_step.x].content.power
           log "enemy after hit #{enemy.inspect}"
           @map[range.y][range.x].content = nil if enemy.dead?
           log "niled dead enemy @ #{range}" if enemy.dead?
@@ -256,7 +274,24 @@ end
 
 class Adv_b < TestFramework
   def logic(t)
-
+    begin
+      game_map = GameMap.new t
+      turn = -2
+      begin
+        # STDERR.puts '---- next turn ---------------'
+        turn += 1
+        changed = game_map.do_turn
+        # STDERR.puts game_map
+      end while changed
+    # STDERR.puts '---- end game  ---------------'
+      turn * game_map.get_total_hp
+    rescue ElfDeadError
+      $power += 1
+      puts "power up to #{$power}, retrying"
+      retry
+    end
+    puts game_map.to_s
+    turn * game_map.get_total_hp
   end
 end
 
@@ -268,8 +303,14 @@ adva = Adv_a.new({
                      "#########\n#G......#\n#.E.#...#\n#..##..G#\n#...##..#\n#...#...#\n#.G...G.#\n#.....G.#\n#########" => 18740
                  }, 15)
 # adva.test
-puts adva.run
+# puts adva.run
 
-advb = Adv_b.new({},)
+advb = Adv_b.new({
+                     "#######\n#.G...#\n#...EG#\n#.#.#G#\n#..G#E#\n#.....#\n#######" => 4988,
+                     "#######\n#E..EG#\n#.#G.E#\n#E.##E#\n#G..#.#\n#..E#.#\n#######" => 31284,
+                     "#######\n#E.G#.#\n#.#G..#\n#G.#.G#\n#G..#.#\n#...E.#\n#######" => 3478,
+                     "#######\n#.E...#\n#.#..G#\n#.###.#\n#E#G#G#\n#...#G#\n#######" => 6474,
+                     "#########\n#G......#\n#.E.#...#\n#..##..G#\n#...##..#\n#...#...#\n#.G...G.#\n#.....G.#\n#########" => 1140
+                 }, 15)
 # advb.test
-# puts advb.run
+puts advb.run
