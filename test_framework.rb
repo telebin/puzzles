@@ -5,6 +5,7 @@ class TestFramework
   end
 
   def test
+    $test = true
     @test_cases.each do |c, r|
       puts "testing \"#{c}\":"
       act = logic c
@@ -18,6 +19,7 @@ class TestFramework
 
   def run(arg = nil)
     raise 'Neither argument nor day to read' unless @day or arg
-    logic(arg or File.open("inputs/day#{@day}.txt") { |f| f.read.chomp })
+    $test = false
+    logic(arg || File.open("inputs/day#{@day}.txt") { |f| f.read.chomp })
   end
 end
