@@ -1,8 +1,8 @@
 require '../test_framework'
+require_relative 'int_computator'
 
 def log(msg)
   STDERR.puts msg.to_s
-  # puts msg.to_s
 end
 
 class Adv_a < TestFramework
@@ -12,19 +12,7 @@ class Adv_a < TestFramework
       tape[1] = 12
       tape[2] = 2
     end
-    ip = 0
-    until tape[ip] == 99
-      case tape[ip]
-      when 1
-        tape[tape[ip + 3]] = tape[tape[ip + 1]] + tape[tape[ip + 2]]
-      when 2
-        tape[tape[ip + 3]] = tape[tape[ip + 1]] * tape[tape[ip + 2]]
-      else
-        raise 'bad thing happened'
-      end
-      ip += 4
-    end
-    tape.first
+    IntComputator.computerize(tape).first
   end
 end
 
@@ -35,19 +23,7 @@ class Adv_b < TestFramework
       tape = t.split(',').map(&:to_i)
       tape[1] = counter / 100
       tape[2] = counter % 100
-      ip = 0
-      until tape[ip] == 99
-        # log "noun,verb=#{[counter/100,counter%100]}(#{counter}) ip=#{ip} tape[#{tape[ip + 1]}]=#{tape[tape[ip + 1]]} +*=#{tape[ip]} tape[#{tape[ip + 2]}]=#{tape[tape[ip + 2]]}"
-        case tape[ip]
-        when 1
-          tape[tape[ip + 3]] = tape[tape[ip + 1]] + tape[tape[ip + 2]]
-        when 2
-          tape[tape[ip + 3]] = tape[tape[ip + 1]] * tape[tape[ip + 2]]
-        else
-          raise 'bad thing happened'
-        end
-        ip += 4
-      end
+      tape = IntComputator.computerize(tape)
       counter += 1
     end until tape.first == 19690720
 
@@ -62,7 +38,7 @@ adva = Adv_a.new({
                      '2,4,4,5,99,0' => 2,
                      '1,1,1,4,99,5,6,0,99' => 30
                  }, 2)
-# adva.test
-# puts adva.run
+#adva.test
+puts adva.run
 
 p Adv_b.new({}, 2).run
