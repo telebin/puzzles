@@ -12,7 +12,7 @@ class Adv_a < TestFramework
       tape[1] = 12
       tape[2] = 2
     end
-    IntComputator.computerize(tape).first
+    IntComputator.new(tape).computerize.first
   end
 end
 
@@ -23,7 +23,7 @@ class Adv_b < TestFramework
       tape = t.split(',').map(&:to_i)
       tape[1] = counter / 100
       tape[2] = counter % 100
-      tape = IntComputator.computerize(tape)
+      tape = IntComputator.new(tape).computerize
       counter += 1
     end until tape.first == 19690720
 
