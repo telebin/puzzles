@@ -23,3 +23,8 @@ class TestFramework
     logic(arg || File.open("inputs/day#{@day}.txt") { |f| f.read.chomp })
   end
 end
+
+$logging = true
+def log(msg)
+  STDERR.puts msg.to_s if $logging
+end
