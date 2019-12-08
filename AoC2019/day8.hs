@@ -14,7 +14,4 @@ part2 = foldl1' (zipWith (\upper lower -> if upper == '2' then lower else upper)
 main = do
   input <- getContents
 --  print $ part1 input
-  putStrLn $ intercalate "\n" $ chunksOf width $ map whiteMapper $ part2 (init input)
-  where
-    whiteMapper '1' = ' '
-    whiteMapper c = c
+  putStrLn $ intercalate "\n" $ chunksOf width $ map (\c -> if c == '1' then ' ' else c) $ part2 (init input)
