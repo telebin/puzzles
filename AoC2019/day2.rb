@@ -1,10 +1,6 @@
 require '../test_framework'
 require_relative 'int_computator'
 
-def log(msg)
-  STDERR.puts msg.to_s
-end
-
 class Adv_a < TestFramework
   def logic(t)
     tape = t.split(',').map(&:to_i)
@@ -13,6 +9,7 @@ class Adv_a < TestFramework
       tape[2] = 2
     end
     IntComputator.new(tape).computerize.first
+    tape.first
   end
 end
 
@@ -23,7 +20,7 @@ class Adv_b < TestFramework
       tape = t.split(',').map(&:to_i)
       tape[1] = counter / 100
       tape[2] = counter % 100
-      tape = IntComputator.new(tape).computerize
+      IntComputator.new(tape).computerize
       counter += 1
     end until tape.first == 19690720
 
@@ -39,6 +36,7 @@ adva = Adv_a.new({
                      '1,1,1,4,99,5,6,0,99' => 30
                  }, 2)
 #adva.test
+$logging = false
 puts adva.run
 
 p Adv_b.new({}, 2).run
