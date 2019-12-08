@@ -24,7 +24,7 @@ class TestFramework
   end
 end
 
-$logging = true
+$logging = false
 def log(msg)
   STDERR.puts msg.to_s if $logging
 end
