@@ -35,8 +35,7 @@ adva = Adv_a.new({
                      '2,4,4,5,99,0' => 2,
                      '1,1,1,4,99,5,6,0,99' => 30
                  }, 2)
-#adva.test
-$logging = false
+adva.test
 puts adva.run
 
 p Adv_b.new({}, 2).run
