@@ -15,4 +15,3 @@ main = do
   weights <- getContents
   -- print $ sum $ map (calculateFuel . read) $ words weights
   print $ sum $ map (calculateFuelForFuel . calculateFuel . read) $ words weights
-
