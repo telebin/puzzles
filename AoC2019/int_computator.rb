@@ -29,23 +29,17 @@ class IntComputator
         #log "[inp #{@prog[@ip+1]}]: inputting to @prog[#{woffset(c, 1)}] = #{@input.empty?} ? #{immediate} : #{@input}"
         if @input.empty? && !immediate
           @state = :INPUT
-          return
+          out = @output
+          @output = []
+          return out
         end
         @prog[woffset(c, 1)] = @input.empty? ? immediate : @input.shift
+        immediate = nil
         @ip += 2
       when 4
-        begin
-          if immediate
-            #log "[out #{@prog[@ip+1]}]: returning #{value(c, 1)} (@ip: #{@ip})"
-            @state = :OUTPUT
-            return [value(c, 1)]
-          else
-            #log "[out #{@prog[@ip+1]}]: adding to output #{value(c, 1)} (@ip: #{@ip})"
-            @output << value(c, 1)
-          end
-        ensure
-          @ip += 2
-        end
+        #log "[out #{@prog[@ip+1]}]: adding to output #{value(c, 1)} (@ip: #{@ip})"
+        @output << value(c, 1)
+        @ip += 2
       when 5
         #log "[jnz #{@prog[@ip+1]} #{@prog[@ip+2]}]: jumping to #{value(b, 2)}: #{!value(c, 1).zero?}"
         @ip = !value(c, 1).zero? ? value(b, 2) : @ip + 3
@@ -76,18 +70,25 @@ class IntComputator
 
     def woffset(mode, value)
       case mode
-      when 0; @prog[@ip + value]
-      when 2; @rela_b + @prog[@ip + value]
-      else raise 'invalid write offset mode'
+      when 0;
+        @prog[@ip + value]
+      when 2;
+        @rela_b + @prog[@ip + value]
+      else
+        raise 'invalid write offset mode'
       end
     end
 
     def value(mode, offset)
       case mode
-      when 0; @prog[@prog[@ip + offset]]
-      when 1; @prog[@ip + offset]
-      when 2; @prog[@rela_b + @prog[@ip + offset]]
-      else raise 'invalid value mode'
+      when 0;
+        @prog[@prog[@ip + offset]]
+      when 1;
+        @prog[@ip + offset]
+      when 2;
+        @prog[@rela_b + @prog[@ip + offset]]
+      else
+        raise 'invalid value mode'
       end.to_i
     end
 end
