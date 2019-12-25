@@ -26,7 +26,7 @@ class IntComputator
         @prog[woffset(a, 3)] = value(c, 1) * value(b, 2)
         @ip += 4
       when 3
-        #log "[inp #{@prog[@ip+1]}]: inputting to @prog[#{woffset(c, 1)}] = #{@input.empty?} ? #{immediate} : #{@input}"
+        #log "[inp #{@prog[@ip+1]}]: inputting to @prog[#{woffset(c, 1)}] = #{@input.empty?} ? #{immediate} : #{@input[0,16]}"
         if @input.empty? && !immediate
           @state = :INPUT
           out = @output
@@ -62,6 +62,7 @@ class IntComputator
         raise 'bad thing happened'
       end
     end
+    #log "[halt #{@prog[@ip]}] (@ip #{@ip})"
     @state = :HALT
     @output
   end
