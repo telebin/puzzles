@@ -1,5 +1,4 @@
 require '../test_framework'
-require 'io/console'
 require_relative 'int_computator'
 
 TILES = %w(. × •)
