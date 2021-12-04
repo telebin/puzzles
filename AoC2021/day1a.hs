@@ -2,7 +2,6 @@ module Main where
 
 import Data.List hiding (group)
 
-
 main = do
     contents <- readFile "day1input.txt"
     let ints = map read $ words contents
