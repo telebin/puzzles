@@ -3,7 +3,7 @@ use std::fs;
 pub fn day1() {
     let dbl_sep = "\n\n";
     let sep = "\n";
-    let data = fs::read_to_string("../inputs/day1.input").expect("the file should be there");
+    let data = fs::read_to_string("inputs/day1.input").expect("the file should be there");
     let data = data.trim();
 
     let max_calories = data.split(dbl_sep)
