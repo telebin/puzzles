@@ -28,10 +28,8 @@ impl Backpack {
 
     fn common_in_three(&self, snd: &Backpack, trd: &Backpack) -> char {
         for c in self.original.chars() {
-            if snd.original.contains(c) {
-                if trd.original.contains(c) {
+            if snd.original.contains(c) && trd.original.contains(c) {
                     return c;
-                }
             }
         }
         panic!("There should be one common character")
@@ -52,6 +50,7 @@ pub fn day3() {
         .map(|b| prio(b.find_common()))
         .reduce(|acc, p| acc + p)
         .unwrap());
+
     let mut x = data.split("\n")
         .map(|line| Backpack::new(line));
     let mut sum = 0;
@@ -62,7 +61,7 @@ pub fn day3() {
         let fst = fst.unwrap();
         let snd = x.next().unwrap();
         let trd = x.next().unwrap();
-        sum += prio(dbg!(fst.common_in_three(&snd, &trd)));
+        sum += prio(fst.common_in_three(&snd, &trd));
     }
     println!("{}", sum);
 }
