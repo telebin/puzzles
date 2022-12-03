@@ -1,43 +1,22 @@
 use std::fs;
 
-#[derive(Debug)]
-struct Backpack {
-    original: String,
-    comp1: String,
-    comp2: String,
+type Backpack = str;
+
+fn find_common(backpack: &Backpack) -> char {
+    let (l, r) = backpack.split_at(backpack.len() / 2);
+    l.chars()
+        .find(|&c| r.contains(c))
+        .expect("There should be one common character")
 }
 
-impl Backpack {
-    fn new(contents: &str) -> Backpack {
-        let halflen = contents.len() / 2;
-        Backpack {
-            original: contents.to_string(),
-            comp1: contents[..halflen].to_string(),
-            comp2: contents[halflen..].to_string()
-        }
-    }
-
-    fn find_common(&self) -> char {
-        for c in self.comp1.chars() {
-            if self.comp2.contains(c) {
-                return c;
-            }
-        }
-        panic!("There should be one common character")
-    }
-
-    fn common_in_three(&self, snd: &Backpack, trd: &Backpack) -> char {
-        for c in self.original.chars() {
-            if snd.original.contains(c) && trd.original.contains(c) {
-                    return c;
-            }
-        }
-        panic!("There should be one common character")
-    }
+fn common_in_three(fst: &Backpack, snd: &Backpack, trd: &Backpack) -> char {
+    fst.chars()
+        .find(|&c| snd.contains(c) && trd.contains(c))
+        .expect("There should be one common character")
 }
 
 fn prio(c: char) -> u32 {
-    let to_subtract = if c.is_lowercase() { 0x60 } else { 65-27 };
+    let to_subtract = if c.is_lowercase() { 0x60 } else { 0x40 - 26 };
     c as u32 - to_subtract
 }
 
@@ -46,22 +25,13 @@ pub fn day3() {
     let data = data.trim();
 
     println!("{}", data.split("\n")
-        .map(|line| Backpack::new(line))
-        .map(|b| prio(b.find_common()))
-        .reduce(|acc, p| acc + p)
-        .unwrap());
+        .map(|b| prio(find_common(b)))
+        .sum::<u32>());
 
-    let mut x = data.split("\n")
-        .map(|line| Backpack::new(line));
-    let mut sum = 0;
-    while let fst = x.next() {
-        if fst.is_none() {
-            break;
-        }
-        let fst = fst.unwrap();
-        let snd = x.next().unwrap();
-        let trd = x.next().unwrap();
-        sum += prio(fst.common_in_three(&snd, &trd));
-    }
-    println!("{}", sum);
+    println!("{}", data.split("\n")
+        .collect::<Vec<&Backpack>>()
+        .chunks(3)
+        .map(|chunk| common_in_three(&chunk[0], &chunk[1], &chunk[2]))
+        .map(|common| prio(common))
+        .sum::<u32>());
 }
