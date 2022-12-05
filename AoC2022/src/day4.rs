@@ -1,5 +1,4 @@
 use std::fs;
-use std::ops::Range;
 
 fn parse_line(line: &str) -> ((i32, i32), (i32, i32)) {
     let ranges = line.split(",")
