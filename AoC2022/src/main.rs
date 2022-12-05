@@ -18,7 +18,7 @@ fn not_implemented() {
 
 fn main() {
     let argv: Vec<String> = env::args().skip(1).collect();
-    let (day, test_mode) = match argv.len() {
+    let (day, _test_mode) = match argv.len() {
         1 => (argv[0].parse::<u8>().unwrap(), true), // TODO
         2 => (argv[0].parse::<u8>().unwrap(), argv[1].parse::<bool>().unwrap()),
         _ => panic!("Wrong number of args, expected 1..2"),
