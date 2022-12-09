@@ -10,8 +10,8 @@ fn parse_line(line: &str) -> ((i32, i32), (i32, i32)) {
     (ranges[0], ranges[1])
 }
 
-pub fn day4() {
-    let data = fs::read_to_string("inputs/day4.input").expect("the file should be there");
+pub fn day4(path: &str) {
+    let data = fs::read_to_string(path).expect("the file should be there");
     let data = data.trim();
 
     println!("{}", data.split("\n")

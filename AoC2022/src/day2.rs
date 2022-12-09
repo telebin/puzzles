@@ -136,9 +136,9 @@ impl Round2 {
     }
 }
 
-pub fn day2() {
+pub fn day2(path: &str) {
     let sep = "\n";
-    let data = fs::read_to_string("inputs/day2.input").expect("The file should be there");
+    let data = fs::read_to_string(path).expect("The file should be there");
     let data = data.trim();
 
     println!("{}", data.split(sep)

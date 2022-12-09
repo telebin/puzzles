@@ -34,8 +34,8 @@ fn parse_moves(data: &str) -> Vec<(usize,usize,usize)> {
         .collect()
 }
 
-pub fn day5() {
-    let data = fs::read_to_string("inputs/day5.input").expect("the file should be there");
+pub fn day5(path: &str) {
+    let data = fs::read_to_string(path).expect("the file should be there");
     let data = data.split("\n\n").collect::<Vec<&str>>();
     let stacks = parse_stacks(data[0]);
     let moves = parse_moves(data[1].trim());

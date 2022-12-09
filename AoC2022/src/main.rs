@@ -19,14 +19,8 @@ fn _type_of<T>(_: &T) {
 }
 
 fn main() {
-    let argv: Vec<String> = env::args().skip(1).collect();
-    let (day, _test_mode) = match argv.len() {
-        1 => (argv[0].parse::<u8>().unwrap(), true),
-        2 => (argv[0].parse::<u8>().unwrap(), argv[1].parse::<bool>().unwrap()),
-        _ => panic!("Wrong number of args, expected 1..=2"),
-    };
     // TODO use the test_mode param, or rather change it to a file path
-    let routing: [(u8, fn()); 6] = [
+    let routing: [(u8, fn(&str)); 6] = [
         (1, day1),
         (2, day2),
         (3, day3),
@@ -34,6 +28,15 @@ fn main() {
         (5, day5),
         (6, day6),
     ];
-    let cl: fn() = || { println!("Selected day is not implemented"); };
-    HashMap::from(routing).get(&day).unwrap_or(&cl)();
+
+    let argv: Vec<String> = env::args().skip(1).collect();
+    let (day, input_path) = match argv.len() {
+        1 => (argv[0].parse::<u8>().unwrap(), "inputs/day".to_string() + &argv[0] + ".test"),
+        2 => (argv[0].parse::<u8>().unwrap(), argv[1].clone()),
+        _ => (routing.last().unwrap().0, "inputs/day".to_string() + &routing.last().unwrap().0.to_string() + ".test"),
+    };
+
+    let cl: fn(&str) = |_| { println!("Selected day is not implemented"); };
+    println!("Executing day {} with file {}", day, input_path);
+    HashMap::from(routing).get(&day).unwrap_or(&cl)(&input_path);
 }

@@ -1,8 +1,8 @@
 use std::fs;
 use std::str::Chars;
 
-pub fn day6() {
-    let data = fs::read_to_string("inputs/day6.input").expect("the file should be there");
+pub fn day6(path: &str) {
+    let data = fs::read_to_string(path).expect("the file should be there");
     let data = data.trim();
 
     let mut b = [' '; 4];
@@ -35,8 +35,8 @@ fn fill(b: &mut [char], chars: &mut Chars) {
 fn is_distinct(arr: &mut [char]) -> bool {
     arr.sort();
     for i in 0..arr.len() - 1 {
-        if arr[i] == arr[i+1] {
-            return false
+        if arr[i] == arr[i + 1] {
+            return false;
         }
     }
     true

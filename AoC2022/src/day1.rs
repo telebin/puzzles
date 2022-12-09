@@ -1,7 +1,7 @@
 use std::fs;
 
-pub fn day1() {
-    let data = fs::read_to_string("inputs/day1.input").expect("the file should be there");
+pub fn day1(path: &str) {
+    let data = fs::read_to_string(path).expect("the file should be there");
     let data = data.trim();
 
     let mut calories: Vec<u32> = data.split("\n\n")

@@ -20,8 +20,8 @@ fn prio(c: char) -> u32 {
     c as u32 - to_subtract
 }
 
-pub fn day3() {
-    let data = fs::read_to_string("inputs/day3.input").expect("the file should be there");
+pub fn day3(path: &str) {
+    let data = fs::read_to_string(path).expect("the file should be there");
     let data = data.trim();
 
     println!("{}", data.split("\n")
