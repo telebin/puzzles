@@ -59,7 +59,7 @@ fn part_one(moves: &Vec<Move>) {
             let (x, y) = move_vec(&head_pos, &tail_pos);
             tail_pos.0 += x;
             tail_pos.1 += y;
-            tail_trace.push(tail_pos.clone());
+            tail_trace.insert(tail_pos.clone());
         }
     }
     println!("{:?}", head_pos);
