@@ -29,7 +29,6 @@ fn _type_of<T>(_: &T) {
 }
 
 fn main() {
-    // TODO use the test_mode param, or rather change it to a file path
     let routing: [(u8, fn(&str)); 10] = [
         (1, day1),
         (2, day2),
