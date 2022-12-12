@@ -12,6 +12,7 @@ use day7::day7;
 use day8::day8;
 use day9::day9;
 use day10::day10;
+use day11::day11;
 
 mod day1;
 mod day2;
@@ -23,13 +24,14 @@ mod day7;
 mod day8;
 mod day9;
 mod day10;
+mod day11;
 
 fn _type_of<T>(_: &T) {
     println!("{}", std::any::type_name::<T>())
 }
 
 fn main() {
-    let routing: [(u8, fn(&str)); 10] = [
+    let routing: [(u8, fn(&str)); 11] = [
         (1, day1),
         (2, day2),
         (3, day3),
@@ -40,6 +42,7 @@ fn main() {
         (8, day8),
         (9, day9),
         (10, day10),
+        (11, day11),
     ];
 
     let argv: Vec<String> = env::args().skip(1).collect();
