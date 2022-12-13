@@ -57,14 +57,6 @@ fn parse_op(text: &str) -> (fn(i64, i64) -> i64, Option<i64>) {
     (op, v)
 }
 
-pub fn day11(path: &str) {
-    let data = fs::read_to_string(path).expect("the file should be there");
-    let data = data.trim();
-
-    do_work(data, 20, part_one);
-    do_work(data, 10_000, part_two);
-}
-
 fn do_work(data: &str, rounds: i32, task: fn(&Monkey, i64, i64) -> i64) {
     let mut monkeys = data.split("\n\n")
         .map(Monkey::new)
@@ -98,4 +90,13 @@ fn part_one(monkey: &Monkey, worry_lv: i64, _: i64) -> i64 {
 
 fn part_two(monkey: &Monkey, worry_lv: i64, modulator: i64) -> i64 {
     monkey.operate(worry_lv) % modulator
+}
+
+
+pub fn day11(path: &str) {
+    let data = fs::read_to_string(path).expect("the file should be there");
+    let data = data.trim();
+
+    do_work(data, 20, part_one);
+    do_work(data, 10_000, part_two);
 }
