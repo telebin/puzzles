@@ -1,7 +1,7 @@
 use std::cmp::Ordering;
 use std::fs;
 use std::str::FromStr;
-use crate::day13::Packet::{Int, List};
+use Packet::{Int, List};
 
 #[derive(Debug, Clone, Eq, PartialEq)]
 enum Packet {
@@ -109,7 +109,7 @@ pub fn day13(path: &str) {
     packets.sort();
     let part2 = packets.iter()
         .enumerate()
-        .filter(|&(_, v)| v == &List(vec![List(vec![Int(2)])]) || v == &List(vec![List(vec![Int(6)])]))
+        .filter(|&(_, v)| v == &List(vec![List(vec![Int(2)])]) || v == &List(vec![List(vec![Int(6)])])) // TODO why &
         .map(|(idx, _)| idx + 1)
         .reduce(|l, r| l * r)
         .unwrap();
